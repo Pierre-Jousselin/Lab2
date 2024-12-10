@@ -5,18 +5,14 @@ This repository contains the work for **LAB2: Fine-Tuning LLM**, focusing on fin
 
 ## Evaluation Metrics
 
-We use **BERTScore** to evaluate the semantic similarity between generated text and reference text. For tasks like translation, you could use metrics like **BLEU score**, which measures sequence overlap and is more suitable for such applications.
+We use **BERTScore** to evaluate the semantic similarity between generated text and reference text. For tasks like translation, metrics such as **BLEU score** are more suitable, as they measure sequence overlap between reference and generated outputs. The choice of metric should align with the task, as each metric emphasizes different aspects of model performance.
 
 ## Fine-Tuning Methodologies
 
-**Model-centric approaches** involve directly improving the model by tuning hyperparameters, optimizing learning rates, or experimenting with different pre-trained architectures to identify the best fit for the task. Additionally, optimizing the model for CPU inference using techniques like quantization can significantly enhance efficiency. 
+**Model-centric approaches** aim to improve the model itself. For example, you we think we can tune hyperparameters like the learning rate, batch size, and optimizer settings to achieve better convergence during fine-tuning. Also we can  experimente with different architecutre or models if we want to do some more special task. We used Lora adapter which consist in freezig most part of the model and train only a subset of parameters. Therefore there is some expreimentatio to do on which subset to train in order to have the best result.
 
-**Data-centric approaches** focus on enhancing the quality and relevance of training data. For instance, task-specific datasets such as those for Python script generation or language translation can be used for specialized fine-tuning. Data augmentation and preprocessing are also essential for improving generalization and robustness, enabling the model to perform better on unseen data.
+**Data-centric approaches** focus on improving the quality and relevance of the dataset used for training. For instance, we wanted to generate Python code, so we  fine-tund the model on a dataset containing annotated Python scripts. Another example could be if we wated to train or improve translation accuracythe we would fine-tune on bilingual corpora like the WMT dataset. There are also some tweeking like data augmentation methods, such as paraphrasing sentences or adding domain-specific examples that can also enhance the model's ability to generalize. Also we neede to be carefuull and to clean the data as the model is trained using a certain template that we need to keep in order to be coherent in our approach.
 
-## Improving Model Performance
+## Models
+As the inference was made on cpu, we add to restrict ourself to small model. Even with only 2.5Gb we can have inference that last 300s which is very long. We really saw in practice that GPus are very very usefull and almost mandatory when usig large language model.
 
-Combining both approaches can yield significant improvements. By systematically experimenting with both model-centric techniques like architecture changes and data-centric strategies like sourcing domain-specific datasets, you can achieve higher task-specific performance. Demonstrating quantitative improvements through metrics like BERTScore or BLEU will showcase the success of these methods.
-
-## Future Work
-
-Potential future work includes testing additional open-source models for better CPU inference, exploring new evaluation metrics, and building a more intuitive user interface for real-world deployment.
